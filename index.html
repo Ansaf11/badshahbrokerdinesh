@@ -13,7 +13,6 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: #000814;
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -73,8 +72,13 @@ h1 {
     color: white;
     text-decoration: none;
     display: block;
-    border: none;
     cursor: pointer;
+    transition: 0.3s;
+}
+
+.join-btn:hover {
+    opacity: 0.9;
+    transform: scale(1.02);
 }
 
 /* ADS BOX */
@@ -115,12 +119,14 @@ h1 {
 !function(f,b,e,v,n,t,s)
 {
 if(f.fbq)return;
+
 n=f.fbq=function(){
 n.callMethod ?
 n.callMethod.apply(n,arguments) : n.queue.push(arguments)
 };
 
 if(!f._fbq)f._fbq=n;
+
 n.push=n;
 n.loaded=!0;
 n.version='2.0';
@@ -131,24 +137,13 @@ t.async=!0;
 t.src=v;
 
 s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)
+s.parentNode.insertBefore(t,s);
 
 }(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 
 fbq('init', '1516051916833936');
 fbq('track', 'PageView');
-
-/* BUTTON TRACKING */
-function trackJoin() {
-
-    fbq('track', 'Subscribe');
-
-    setTimeout(function () {
-        window.location.href =
-        'https://t.me/+INSVPXwymIU5NzFl';
-    }, 300);
-}
 </script>
 
 <noscript>
@@ -176,15 +171,17 @@ src="https://www.facebook.com/tr?id=1516051916833936&ev=PageView&noscript=1"/>
 
     <p>Join our learning community and grow your knowledge</p>
 
-    <!-- FIXED BUTTON -->
+    <!-- TELEGRAM BUTTON -->
     <a id="joinTelegramBtn"
-       href="javascript:void(0)"
        class="join-btn"
-       onclick="trackJoin()">
+       href="https://t.me/+INSVPXwymIU5NzFl"
+       role="button"
+       data-track="subscribe"
+       data-meta="subscribe">
        JOIN TELEGRAM
     </a>
 
-    <!-- CLICKABLE BOX -->
+    <!-- ADS BOX -->
     <div class="ads-box"
          onclick="window.location.href='https://t.me/+m04-TJU-qkwwODY1'">
         Advertising By <span>Digital Growth Zone</span>
@@ -200,6 +197,28 @@ src="https://www.facebook.com/tr?id=1516051916833936&ev=PageView&noscript=1"/>
     </div>
 
 </div>
+
+<!-- BUTTON TRACKING SCRIPT -->
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const btn = document.getElementById("joinTelegramBtn");
+
+    if(btn){
+
+        btn.addEventListener("click", function () {
+
+            /* META EVENTS */
+            fbq('track', 'Subscribe');
+            fbq('trackCustom', 'TelegramJoin');
+
+        });
+
+    }
+
+});
+</script>
 
 </body>
 </html>
